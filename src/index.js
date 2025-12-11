@@ -4,8 +4,18 @@ dotenv.config({
 });
 
 import connectDB from "./db/index.js";
+import app from "./app.js";
 
-connectDB();
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT, () => {
+        console.log(`🚀 Server started at http://localhost:${process.env.PORT}`);
+    });
+})
+.catch((err) => {
+    console.error("❌ ERROR:", err);
+    throw err;
+});
 
 /*
 import mongoose from "mongoose";
